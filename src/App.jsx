@@ -41,6 +41,13 @@ import './App.scss';
 
 export default function App() {
   const [selectedPuppyId, setSelectedPuppyId] = useState();
+  const [removedPuppies, setRemovedPuppies] = useState([]);
+
+  function removePuppy(id) {
+    console.log('Removed Puppies:', removedPuppies);
+    setRemovedPuppies((prev) => [...prev, id]);
+    setSelectedPuppyId(null);
+  }
 
   return (
     <>
@@ -48,10 +55,14 @@ export default function App() {
         <h1>Puppy Bowl</h1>
         <PuppyForm />
         <main>
-          <PuppyList setSelectedPuppyId={setSelectedPuppyId} />
+          <PuppyList
+            setSelectedPuppyId={setSelectedPuppyId}
+            removedPuppies={removedPuppies}
+          />
           <PuppyDetails
             selectedPuppyId={selectedPuppyId}
             setSelectedPuppyId={setSelectedPuppyId}
+            removePuppy={removePuppy}
           />
         </main>
       </div>
@@ -59,4 +70,4 @@ export default function App() {
   );
 }
 
-console.log('PuppyList component is rendering');
+// console.log('PuppyList component is rendering');

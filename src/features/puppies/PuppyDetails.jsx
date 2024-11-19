@@ -55,18 +55,23 @@
 //   );
 // }
 
-import { useDeletePlayerMutation, useGetPlayerQuery } from './puppySlice';
+import { useGetPlayerQuery } from './puppySlice';
 
-export default function PuppyDetails({ selectedPuppyId, setSelectedPuppyId }) {
+export default function PuppyDetails({ selectedPuppyId, removePuppy }) {
   const { data: puppy, isLoading } = useGetPlayerQuery(selectedPuppyId, {
     skip: !selectedPuppyId,
   });
 
-  const [deletePuppy] = useDeletePlayerMutation();
+  // console.log('selectedPuppyId:', selectedPuppyId);
+  // console.log('PuppyDetails received selectedPuppyId:', selectedPuppyId);
+  // console.log('Fetching data for Puppy ID:', selectedPuppyId);
+  // console.log('Fetched Puppy Data:', puppy);
 
-  function removePuppy(id) {
-    deletePuppy(id).then(() => setSelectedPuppyId());
-  }
+  // const [deletePuppy] = useDeletePlayerMutation();
+
+  // function removePuppy(id) {
+  //   deletePuppy(id).then(() => setSelectedPuppyId());
+  // }
 
   let $details;
   if (!selectedPuppyId) {
@@ -80,8 +85,14 @@ export default function PuppyDetails({ selectedPuppyId, setSelectedPuppyId }) {
           {puppy.name} #{puppy.id}
         </h3>
         <p>{puppy.breed}</p>
+        <p>Status: {puppy.status}</p>
         <p>Team {puppy.team?.name ?? 'Unassigned'}</p>
-        <button onClick={() => removePuppy(puppy.id)}>
+        <button
+          onClick={() => {
+            console.log('Calling removePuppy with ID:', puppy.id);
+            removePuppy(puppy.id);
+          }}
+        >
           Remove from roster
         </button>
         <figure>

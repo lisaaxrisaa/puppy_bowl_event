@@ -10,6 +10,7 @@ const puppyApi = apiSlice.injectEndpoints({
     getPlayer: builder.query({
       query: (id) => `/players/${id}`,
       providesTags: (result, error, id) => [{ type: 'Players', id }],
+      transformResponse: (response) => response.data.player,
     }),
     addPlayer: builder.mutation({
       query: (newPlayer) => ({
