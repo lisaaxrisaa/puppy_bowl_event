@@ -10,8 +10,11 @@ import { useGetPlayersQuery } from './puppySlice';
 export default function PuppyList({ setSelectedPuppyId }) {
   // TODO: Get data from getPuppies query
 
-  const { data: players = [], isLoading, error } = useGetPlayersQuery();
-  const puppies = players.players;
+  const { data: players = {}, isLoading, error } = useGetPlayersQuery();
+  // const puppies = players.players;
+  const puppies = players?.data?.players || [];
+
+  // console.log(players);
   if (isLoading) {
     return <p>Loading puppies...</p>;
   }
@@ -23,7 +26,7 @@ export default function PuppyList({ setSelectedPuppyId }) {
     <article>
       <h2>Roster</h2>
       <ul className="puppies">
-        {isLoading && <li>Loading players...</li>}
+        {/* {isLoading && <li>Loading players...</li>} */}
         {puppies.map((p) => (
           <li key={p.id}>
             <h3>
@@ -32,7 +35,9 @@ export default function PuppyList({ setSelectedPuppyId }) {
             <figure>
               <img src={p.imageUrl} alt={p.name} />
             </figure>
-            <button onClick={() => setSelectedPuppyId(p.id)}></button>
+            <button onClick={() => setSelectedPuppyId(p.id)}>
+              Click for Puppy Info
+            </button>
           </li>
         ))}
       </ul>

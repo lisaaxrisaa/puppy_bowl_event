@@ -12,15 +12,15 @@ export const apiSlice = createApi({
   }),
   tagTypes: ['Players'],
   endpoints: (builder) => ({
-    getPuppies: builder.query({
+    getPlayers: builder.query({
       query: () => 'players',
       providesTags: ['Players'],
     }),
     addPlayer: builder.mutation({
-      query: (newplayer) => ({
+      query: (newPlayer) => ({
         url: 'players',
         method: 'POST',
-        body: newplayer,
+        body: newPlayer,
       }),
       invalidatesTags: ['Players'],
     }),

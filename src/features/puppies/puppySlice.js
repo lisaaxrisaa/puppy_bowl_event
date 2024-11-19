@@ -7,33 +7,33 @@ const puppyApi = apiSlice.injectEndpoints({
       transformResponse: (response) => response.data,
       providesTags: ['Players'],
     }),
-    getPuppy: builder.query({
-      query: (id) => `/puppies/${id}`,
-      providesTags: (result, error, id) => [{ type: 'Puppy', id }],
+    getPlayer: builder.query({
+      query: (id) => `/players/${id}`,
+      providesTags: (result, error, id) => [{ type: 'Players', id }],
     }),
-    addPuppy: builder.mutation({
-      query: (newPuppy) => ({
-        url: '/puppies',
+    addPlayer: builder.mutation({
+      query: (newPlayer) => ({
+        url: '/players',
         method: 'POST',
-        body: newPuppy,
+        body: newPlayer,
       }),
-      invalidatesTags: ['Puppy'],
+      invalidatesTags: ['Players'],
     }),
-    deletePuppy: builder.mutation({
+    deletePlayer: builder.mutation({
       query: (id) => ({
-        url: `/puppies/${id}`,
+        url: `/players/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: (result, error, id) => [{ type: 'Puppy', id }],
+      invalidatesTags: (result, error, id) => [{ type: 'Players', id }],
     }),
   }),
 });
 
 export const {
   useGetPlayersQuery,
-  useGetPuppyQuery,
-  useAddPuppyMutation,
-  useDeletePuppyMutation,
+  useGetPlayerQuery,
+  useAddPlayerMutation,
+  useDeletePlayerMutation,
 } = puppyApi;
 
 export default puppyApi;

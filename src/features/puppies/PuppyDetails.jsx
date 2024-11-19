@@ -55,14 +55,14 @@
 //   );
 // }
 
-import { useDeletePuppyMutation, useGetPuppyQuery } from './puppySlice';
+import { useDeletePlayerMutation, useGetPlayerQuery } from './puppySlice';
 
 export default function PuppyDetails({ selectedPuppyId, setSelectedPuppyId }) {
-  const { data: puppy, isLoading } = useGetPuppyQuery(selectedPuppyId, {
+  const { data: puppy, isLoading } = useGetPlayerQuery(selectedPuppyId, {
     skip: !selectedPuppyId,
   });
 
-  const [deletePuppy] = useDeletePuppyMutation();
+  const [deletePuppy] = useDeletePlayerMutation();
 
   function removePuppy(id) {
     deletePuppy(id).then(() => setSelectedPuppyId());
