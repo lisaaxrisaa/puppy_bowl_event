@@ -26,8 +26,8 @@ export default function PuppyList({ setSelectedPuppyId, removedPuppies }) {
     (puppy) => !removedPuppies.includes(puppy.id)
   );
 
-  console.log('Removed Puppies:', removedPuppies); // Debugging removed state
-  console.log('Visible Puppies:', visiblePuppies);
+  // console.log('Removed Puppies:', removedPuppies); // Debugging removed state
+  // console.log('Visible Puppies:', visiblePuppies);
 
   if (isLoading) {
     return <p>Loading puppies...</p>;
